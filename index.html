@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>En Scène ! — Jeu d'impro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#150709;
+    --bg-2:#241017;
+    --card:#2c141b;
+    --curtain:#7a1f2b;
+    --curtain-dark:#3d0f16;
+    --gold:#c9a227;
+    --gold-bright:#eccb5c;
+    --cream:#f5efe6;
+    --rose:#b98087;
+    --font-display:'Playfair Display', serif;
+    --font-body:'Work Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--cream);font-family:var(--font-body);min-height:100vh;}
+  body{
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(201,162,39,0.10), transparent 60%),
+      var(--bg);
+  }
+  .curtain-bar{
+    height:14px;
+    background: repeating-linear-gradient(90deg, var(--curtain) 0 18px, var(--curtain-dark) 18px 36px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5) inset;
+  }
+  .wrap{
+    max-width:480px;
+    margin:0 auto;
+    min-height:calc(100vh - 28px);
+    display:flex;
+    flex-direction:column;
+    padding:0 0 32px;
+  }
+  header{
+    text-align:center;
+    padding:28px 20px 8px;
+  }
+  header h1{
+    font-family:var(--font-display);
+    font-weight:900;
+    font-size:2rem;
+    margin:0;
+    letter-spacing:0.5px;
+    color:var(--gold-bright);
+    text-shadow:0 2px 14px rgba(201,162,39,0.35);
+  }
+  header p{
+    margin:6px 0 0;
+    font-size:0.85rem;
+    color:var(--rose);
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+  main{
+    flex:1;
+    padding:16px 20px 8px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid rgba(201,162,39,0.18);
+    border-radius:16px;
+    padding:22px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 6px;
+  }
+  h2{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1.4rem;
+    margin:0 0 10px;
+    color:var(--cream);
+  }
+  p.lead{ line-height:1.55; color:var(--cream); opacity:0.92; margin:0 0 4px;}
+  .muted{ color:var(--rose); font-size:0.9rem; }
+
+  button{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:1rem;
+    border:none;
+    border-radius:12px;
+    padding:14px 18px;
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  button:active{ transform:scale(0.97); }
+  .btn-primary{
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color:#241007;
+    box-shadow:0 6px 18px rgba(201,162,39,0.28);
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--cream);
+    border:1px solid rgba(245,239,230,0.25);
+  }
+  .btn-block{ width:100%; }
+  .btn-row{ display:flex; gap:10px; }
+  .btn-row button{ flex:1; }
+
+  .stepper{ display:flex; align-items:center; justify-content:center; gap:18px; margin:6px 0 4px; }
+  .stepper button{ width:44px; height:44px; border-radius:50%; padding:0; font-size:1.3rem; }
+  .stepper .count{ font-family:var(--font-display); font-size:2rem; min-width:40px; text-align:center; color:var(--gold-bright);}
+
+  .player-row{ display:flex; gap:8px; align-items:center; margin-bottom:10px; }
+  .player-row input[type=text]{
+    flex:1; background:var(--bg-2); border:1px solid rgba(245,239,230,0.15);
+    color:var(--cream); border-radius:10px; padding:11px 12px; font-family:var(--font-body); font-size:0.95rem;
+  }
+  .pill-group{ display:flex; gap:6px; }
+  .pill{
+    font-family:var(--font-mono); font-size:0.72rem; padding:8px 9px; border-radius:20px;
+    border:1px solid rgba(245,239,230,0.2); background:transparent; color:var(--rose); cursor:pointer;
+  }
+  .pill.active{ background:var(--gold); color:#241007; border-color:var(--gold); }
+
+  .spotlight-wrap{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    padding:34px 10px; border-radius:16px; overflow:hidden;
+    background:radial-gradient(circle at 50% 40%, rgba(201,162,39,0.22), transparent 65%);
+  }
+  .spotlight-wrap.pulse::before{
+    content:''; position:absolute; inset:-40%;
+    background:radial-gradient(circle, rgba(201,162,39,0.18), transparent 60%);
+    animation:pulseGlow 3.2s ease-in-out infinite;
+  }
+  @keyframes pulseGlow{ 0%,100%{ transform:scale(0.85); opacity:0.5;} 50%{ transform:scale(1.1); opacity:1;} }
+  .reveal-card{
+    animation:revealIn .45s ease;
+    text-align:center;
+  }
+  @keyframes revealIn{ from{ opacity:0; transform:scale(0.85);} to{opacity:1; transform:scale(1);} }
+  .role-name{ font-family:var(--font-display); font-size:1.3rem; color:var(--gold-bright); margin:2px 0 10px;}
+  .objective-box{
+    background:var(--bg-2); border-left:3px solid var(--gold); border-radius:8px;
+    padding:12px 14px; text-align:left; font-size:0.92rem; line-height:1.5; margin-top:8px;
+  }
+
+  .score-table{ width:100%; border-collapse:collapse; margin-top:6px;}
+  .score-table td{ padding:9px 4px; border-bottom:1px solid rgba(245,239,230,0.1); font-family:var(--font-mono); font-size:0.9rem;}
+  .score-table td.rank{ color:var(--gold); width:24px; }
+  .score-table td.total{ text-align:right; color:var(--gold-bright); font-weight:600;}
+
+  .name-choices{ display:flex; flex-direction:column; gap:8px; margin-top:10px;}
+  .name-choices button{ background:var(--bg-2); color:var(--cream); border:1px solid rgba(245,239,230,0.15); text-align:left;}
+  .name-choices button.selected{ border-color:var(--gold); background:rgba(201,162,39,0.15);}
+
+  footer{ text-align:center; padding:10px 20px 0; }
+</style>
+</head>
+<body>
+<div class="curtain-bar"></div>
+<div class="wrap">
+  <header>
+    <h1>🎭 En Scène !</h1>
+    <p>le générateur de scènes d'impro</p>
+  </header>
+  <main id="app"></main>
+</div>
+<div class="curtain-bar"></div>
+
+<script>
+// ---------- CONTENT ----------
+const SCENARIOS = [
+  { title:"Le buffet du mariage",
+    context:"Un mariage tourne au chaos pendant le repas de fête. Le buffet est somptueux, mais quelque chose cloche entre les invités.",
+    roles:[
+      {m:"Le témoin du marié, un peu jaloux", f:"La témoin du marié, un peu jalouse"},
+      {m:"L'ex du marié, caché derrière le bar", f:"L'ex du marié, cachée derrière le bar"},
+      {m:"Le traiteur, à bout de nerfs", f:"La traiteuse, à bout de nerfs"},
+      {m:"Le père envahissant de la mariée", f:"La mère envahissante de la mariée"},
+      {m:"Le photographe maladroit", f:"La photographe maladroite"},
+      {m:"L'invité surprise, non convié", f:"L'invitée surprise, non conviée"}
+    ]
+  },
+  { title:"Le vol retardé",
+    context:"Un vol est annulé en pleine nuit. Un petit groupe de passagers se retrouve coincé au terminal, avec beaucoup trop de temps devant lui.",
+    roles:[
+      {m:"Le steward épuisé", f:"L'hôtesse épuisée"},
+      {m:"Le voyageur d'affaires stressé", f:"La voyageuse d'affaires stressée"},
+      {m:"Le touriste complètement perdu", f:"La touriste complètement perdue"},
+      {m:"L'agent de sécurité un peu trop zélé", f:"L'agente de sécurité un peu trop zélée"},
+      {m:"Le musicien qui va rater son concert", f:"La musicienne qui va rater son concert"},
+      {m:"Le mystérieux passager en costume", f:"La mystérieuse passagère en costume"}
+    ]
+  },
+  { title:"La colocation",
+    context:"Une réunion de colocataires est organisée en urgence pour parler du loyer et du ménage. Ça sent la crise.",
+    roles:[
+      {m:"Le coloc qui ne paie jamais à temps", f:"La coloc qui ne paie jamais à temps"},
+      {m:"L'ex qui revient chercher ses affaires", f:"L'ex qui revient chercher ses affaires"},
+      {m:"Le voisin bruyant venu se plaindre", f:"La voisine bruyante venue se plaindre"},
+      {m:"Le propriétaire en visite surprise", f:"La propriétaire en visite surprise"},
+      {m:"L'ami incrusté depuis trois semaines", f:"L'amie incrustée depuis trois semaines"},
+      {m:"Le coloc secrètement amoureux d'un autre coloc", f:"La coloc secrètement amoureuse d'un autre coloc"}
+    ]
+  },
+  { title:"Le sous-marin en avarie",
+    context:"Une panne mystérieuse immobilise un sous-marin en pleine mission. L'équipage doit garder son sang-froid... ou pas.",
+    roles:[
+      {m:"Le commandant du sous-marin", f:"La commandante du sous-marin"},
+      {m:"Le mécanicien en pleine panique", f:"La mécanicienne en pleine panique"},
+      {m:"L'espion infiltré dans l'équipage", f:"L'espionne infiltrée dans l'équipage"},
+      {m:"Le novice terrifié", f:"La novice terrifiée"},
+      {m:"Le scientifique qui cache un secret", f:"La scientifique qui cache un secret"},
+      {m:"L'opérateur radio qui capte un message étrange", f:"L'opératrice radio qui capte un message étrange"}
+    ]
+  },
+  { title:"Le tournage de télé-réalité",
+    context:"Les caméras tournent en continu dans une villa. Alliances, coups bas et petites phrases : rien n'est jamais anodin.",
+    roles:[
+      {m:"Le candidat manipulateur", f:"La candidate manipulatrice"},
+      {m:"Le présentateur sous pression", f:"La présentatrice sous pression"},
+      {m:"Le caméraman qui n'en peut plus", f:"La cadreuse qui n'en peut plus"},
+      {m:"Le candidat naïf", f:"La candidate naïve"},
+      {m:"Le producteur paniqué par l'audience", f:"La productrice paniquée par l'audience"},
+      {m:"L'ex-candidat revenu faire un scandale", f:"L'ex-candidate revenue faire un scandale"}
+    ]
+  },
+  { title:"Le dîner de famille",
+    context:"Un repas de famille censé être tranquille. Sauf que tout le monde a quelque chose à cacher, ou à annoncer.",
+    roles:[
+      {m:"Le grand-père autoritaire", f:"La grand-mère autoritaire"},
+      {m:"L'oncle fauché qui vient demander de l'argent", f:"La tante fauchée qui vient demander de l'argent"},
+      {m:"Le cousin qui a une grande nouvelle à annoncer", f:"La cousine qui a une grande nouvelle à annoncer"},
+      {m:"Le beau-parent mal à l'aise", f:"La belle-parente mal à l'aise"},
+      {m:"L'enfant terrible de la famille", f:"La terreur de la famille"},
+      {m:"Le parent qui cache une liaison", f:"La mère qui cache une liaison"}
+    ]
+  },
+  { title:"Le braquage raté",
+    context:"Un braquage de banque part complètement en vrille. Les otages, eux, gardent un calme suspect.",
+    roles:[
+      {m:"Le braqueur en chef, pas très sûr de lui", f:"La braqueuse en chef, pas très sûre d'elle"},
+      {m:"L'employé de banque, calme et malin", f:"L'employée de banque, calme et maligne"},
+      {m:"L'otage qui prend tout ça avec humour", f:"L'otage qui prend tout ça avec humour"},
+      {m:"Le négociateur de police au téléphone", f:"La négociatrice de police au téléphone"},
+      {m:"Le complice qui veut tout arrêter", f:"La complice qui veut tout arrêter"},
+      {m:"Le client qui filme tout en cachette", f:"La cliente qui filme tout en cachette"}
+    ]
+  },
+  { title:"L'expédition perdue",
+    context:"Un groupe de randonneurs se retrouve perdu en montagne alors que le temps se dégrade sérieusement.",
+    roles:[
+      {m:"Le guide qui a perdu la carte", f:"La guide qui a perdu la carte"},
+      {m:"L'aventurier bien trop confiant", f:"L'aventurière bien trop confiante"},
+      {m:"Le novice complètement épuisé", f:"La novice complètement épuisée"},
+      {m:"Le survivaliste un peu parano", f:"La survivaliste un peu parano"},
+      {m:"Le photographe en quête du cliché parfait", f:"La photographe en quête du cliché parfait"},
+      {m:"L'inconnu croisé en chemin, qui cache quelque chose", f:"L'inconnue croisée en chemin, qui cache quelque chose"}
+    ]
+  }
+];
+
+const OBJECTIVES = [
+  "Fais dire à un autre joueur le mot « impossible ».",
+  "Convaincs le groupe de changer complètement de plan.",
+  "Reste calme et tourne tout en dérision, quoi qu'il arrive.",
+  "Raconte un mensonge énorme sans jamais être découvert.",
+  "Fais en sorte qu'on te confie un objet ou un secret important.",
+  "Imite discrètement les gestes d'un autre joueur pendant toute la scène.",
+  "Refuse toutes les propositions du groupe, sans jamais dire non directement.",
+  "Fais croire que tu es quelqu'un de bien plus important que tu ne l'es.",
+  "Trouve une excuse pour quitter la scène puis y revenir.",
+  "Fais rire un joueur en particulier — et seulement lui.",
+  "Recrute discrètement un allié secret parmi les autres joueurs.",
+  "Ne t'exprime que par questions pendant toute la scène.",
+  "Cache un objet imaginaire et ne révèle jamais où.",
+  "Fais croire que tu détiens un secret sur un autre personnage.",
+  "Change complètement d'avis au moins deux fois pendant la scène.",
+  "Complimente une personne du groupe de façon exagérée.",
+  "Trouve un prétexte pour donner un ordre à tout le monde.",
+  "Fais une prédiction dramatique sur ce qui va arriver.",
+  "Essaie de convaincre tout le monde que la situation est parfaitement normale.",
+  "Révèle une fausse identité juste avant la fin de la scène."
+];
+
+const EVENTS = [
+  "Une coupure de courant plonge tout le monde dans le noir quelques secondes.",
+  "Un bruit suspect se fait entendre tout près.",
+  "Quelqu'un reçoit un message urgent et mystérieux.",
+  "Un objet important disparaît soudainement.",
+  "Une personne inattendue fait irruption dans la scène.",
+  "Une alarme se déclenche sans raison apparente.",
+  "Le temps se dégrade brutalement.",
+  "Un des personnages se souvient d'un détail qui change tout.",
+  "Une échéance tombe : il faut décider, maintenant.",
+  "Une odeur ou un bruit étrange inquiète tout le monde.",
+  "Quelqu'un annonce une nouvelle inattendue par téléphone.",
+  "Un lien caché entre deux personnages est révélé au grand jour.",
+  "Une panne ou un incident technique bloque tout le monde.",
+  "Un des personnages doit prendre une décision immédiate.",
+  "Une rumeur commence brusquement à circuler dans le groupe."
+];
+
+// ---------- STATE ----------
+let state = {
+  screen:'setup',
+  players:[], // {name, gender}
+  scores:{},  // name -> total
+  scenario:null,
+  assignments:[], // {name, role, objective}
+  revealIndex:0,
+  reportIndex:0,
+  voteIndex:0,
+  selfReport:{}, // name -> bool
+  votes:{}, // name -> votesReceived count
+  eventText:'',
+  autoTimer:null
+};
+
+function initPlayers(n){
+  const arr=[];
+  for(let i=0;i<n;i++){
+    arr.push(state.players[i] || {name:'', gender:'n'});
+  }
+  state.players = arr;
+}
+initPlayers(5);
+
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function generateStory(){
+  const scenario = pick(SCENARIOS);
+  const roles = shuffle(scenario.roles).slice(0, state.players.length);
+  const objectives = shuffle(OBJECTIVES).slice(0, state.players.length);
+  const assignments = state.players.map((p, i)=>{
+    const roleObj = roles[i];
+    const roleText = p.gender==='f' ? roleObj.f : roleObj.m;
+    const name = p.name.trim() || ('Joueur ' + (i+1));
+    return { name, role: roleText, objective: objectives[i] };
+  });
+  state.scenario = scenario;
+  state.assignments = assignments;
+  state.revealIndex = 0;
+  state.reportIndex = 0;
+  state.voteIndex = 0;
+  state.selfReport = {};
+  state.votes = {};
+  assignments.forEach(a=> state.votes[a.name] = 0);
+}
+
+function triggerEvent(){
+  clearTimeout(state.autoTimer);
+  state.eventText = pick(EVENTS);
+  state.screen = 'event';
+  render();
+}
+
+function goto(screen){ state.screen = screen; render(); }
+
+// ---------- RENDER ----------
+function render(){
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  const view = VIEWS[state.screen];
+  app.appendChild(view());
+}
+
+function el(html){
+  const div = document.createElement('div');
+  div.innerHTML = html.trim();
+  return div.firstElementChild;
+}
+
+const VIEWS = {
+
+  setup(){
+    const n = state.players.length;
+    const rows = state.players.map((p,i)=>`
+      <div class="player-row">
+        <input type="text" placeholder="Joueur ${i+1}" value="${p.name}" data-idx="${i}" class="pname">
+        <div class="pill-group" data-idx="${i}">
+          <button class="pill gender ${p.gender==='h'?'active':''}" data-g="h" data-idx="${i}">H</button>
+          <button class="pill gender ${p.gender==='f'?'active':''}" data-g="f" data-idx="${i}">F</button>
+          <button class="pill gender ${p.gender==='n'?'active':''}" data-g="n" data-idx="${i}">–</button>
+        </div>
+      </div>
+    `).join('');
+
+    const c = el(`
+      <div class="card">
+        <p class="eyebrow">Étape 1 · Installation</p>
+        <h2>Qui joue ce soir ?</h2>
+        <div class="stepper">
+          <button id="minus">−</button>
+          <div class="count">${n}</div>
+          <button id="plus">+</button>
+        </div>
+        <p class="muted" style="text-align:center;margin-top:0;">joueurs (3 à 6)</p>
+        <div style="margin-top:14px;">${rows}</div>
+        <button class="btn-primary btn-block" id="go" style="margin-top:12px;">C'est parti →</button>
+      </div>
+    `);
+
+    c.querySelector('#minus').onclick = ()=>{ if(state.players.length>3){ state.players.pop(); render(); } };
+    c.querySelector('#plus').onclick = ()=>{ if(state.players.length<6){ state.players.push({name:'',gender:'n'}); render(); } };
+    c.querySelectorAll('.pname').forEach(inp=>{
+      inp.oninput = (e)=>{ state.players[e.target.dataset.idx].name = e.target.value; };
+    });
+    c.querySelectorAll('.gender').forEach(btn=>{
+      btn.onclick = (e)=>{ state.players[e.target.dataset.idx].gender = e.target.dataset.g; render(); };
+    });
+    c.querySelector('#go').onclick = ()=> goto('ready');
+    return c;
+  },
+
+  ready(){
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">Étape 2 · Génération</p>
+        <h2>Prêts à découvrir votre histoire ?</h2>
+        <p class="lead">Une situation et un rôle secret vont être tirés pour chacun de vous.</p>
+        <button class="btn-primary btn-block" id="gen" style="margin-top:16px;">🎲 Générer l'histoire</button>
+        <button class="btn-ghost btn-block" id="back" style="margin-top:10px;">← Modifier les joueurs</button>
+      </div>
+    `);
+    c.querySelector('#gen').onclick = ()=>{ generateStory(); goto('context'); };
+    c.querySelector('#back').onclick = ()=> goto('setup');
+    return c;
+  },
+
+  context(){
+    const s = state.scenario;
+    const c = el(`
+      <div class="card">
+        <p class="eyebrow">La situation</p>
+        <h2>${s.title}</h2>
+        <p class="lead">${s.context}</p>
+        <p class="muted" style="margin-top:14px;">Lisez la situation à voix haute, tout le monde doit la connaître. Les rôles, eux, restent secrets.</p>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Découvrir les rôles →</button>
+      </div>
+    `);
+    c.querySelector('#next').onclick = ()=> goto('reveal');
+    return c;
+  },
+
+  reveal(){
+    const i = state.revealIndex;
+    const a = state.assignments[i];
+    const c = el(`
+      <div class="card">
+        <p class="eyebrow">Rôle secret ${i+1} / ${state.assignments.length}</p>
+        <h2>📱 Passe le téléphone à ${a.name}</h2>
+        <p class="muted">Les autres ne regardent pas l'écran.</p>
+        <div class="spotlight-wrap" id="spot">
+          <button class="btn-primary" id="showBtn">Je suis prêt(e) à voir mon rôle</button>
+        </div>
+        <button class="btn-ghost btn-block" id="nextBtn" style="display:none;margin-top:10px;">Suivant →</button>
+      </div>
+    `);
+    const spot = c.querySelector('#spot');
+    c.querySelector('#showBtn').onclick = ()=>{
+      spot.innerHTML = `
+        <div class="reveal-card">
+          <p class="eyebrow">Ton rôle</p>
+          <p class="role-name">${a.role}</p>
+          <div class="objective-box"><strong>Objectif secret :</strong><br>${a.objective}</div>
+        </div>`;
+      c.querySelector('#nextBtn').style.display = 'block';
+    };
+    c.querySelector('#nextBtn').onclick = ()=>{
+      if(i+1 < state.assignments.length){ state.revealIndex++; render(); }
+      else { goto('scene'); }
+    };
+    return c;
+  },
+
+  scene(){
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">🎬 La scène commence</p>
+        <h2>Improvisez !</h2>
+        <div class="spotlight-wrap pulse" style="min-height:110px;"></div>
+        <p class="lead" style="margin-top:12px;">Un rebondissement va survenir... au moment le plus inattendu.</p>
+        <button class="btn-primary btn-block" id="trigger" style="margin-top:14px;">⚡ Déclencher l'événement</button>
+        <p class="muted" style="margin-top:8px;">(ou laissez faire le hasard)</p>
+      </div>
+    `);
+    c.querySelector('#trigger').onclick = triggerEvent;
+    const delay = 45000 + Math.random()*75000; // 45s–120s
+    state.autoTimer = setTimeout(triggerEvent, delay);
+    return c;
+  },
+
+  event(){
+    const c = el(`
+      <div class="card reveal-card" style="text-align:center;">
+        <p class="eyebrow">🎭 Rebondissement</p>
+        <h2>${state.eventText}</h2>
+        <p class="lead">Intégrez ça à la scène, puis amenez-la vers sa conclusion.</p>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Continuer la scène →</button>
+      </div>
+    `);
+    c.querySelector('#next').onclick = ()=> goto('wrapup');
+    return c;
+  },
+
+  wrapup(){
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">Fin de la scène</p>
+        <h2>Concluez naturellement</h2>
+        <p class="lead">Prenez encore une minute ou deux pour terminer la scène, puis validez.</p>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Terminer la scène →</button>
+      </div>
+    `);
+    c.querySelector('#next').onclick = ()=> goto('selfreport');
+    return c;
+  },
+
+  selfreport(){
+    const i = state.reportIndex;
+    const a = state.assignments[i];
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">Bilan ${i+1} / ${state.assignments.length}</p>
+        <h2>📱 ${a.name}</h2>
+        <p class="lead">As-tu atteint ton objectif secret ?</p>
+        <p class="objective-box">${a.objective}</p>
+        <div class="btn-row" style="margin-top:14px;">
+          <button class="btn-primary" id="yes">Oui, réussi !</button>
+          <button class="btn-ghost" id="no">Non, raté</button>
+        </div>
+      </div>
+    `);
+    const advance = (val)=>{
+      state.selfReport[a.name] = val;
+      if(i+1 < state.assignments.length){ state.reportIndex++; render(); }
+      else { goto('vote'); }
+    };
+    c.querySelector('#yes').onclick = ()=> advance(true);
+    c.querySelector('#no').onclick = ()=> advance(false);
+    return c;
+  },
+
+  vote(){
+    const i = state.voteIndex;
+    const voter = state.assignments[i];
+    const others = state.assignments.filter(a=> a.name !== voter.name);
+    const choices = others.map(o=> `<button class="choice" data-name="${o.name}">${o.name}</button>`).join('');
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">Vote ${i+1} / ${state.assignments.length}</p>
+        <h2>📱 ${voter.name}</h2>
+        <p class="lead">Qui a été le/la meilleur(e) acteur/actrice de la scène ?</p>
+        <div class="name-choices">${choices}</div>
+      </div>
+    `);
+    c.querySelectorAll('.choice').forEach(btn=>{
+      btn.onclick = ()=>{
+        state.votes[btn.dataset.name] = (state.votes[btn.dataset.name]||0) + 1;
+        if(i+1 < state.assignments.length){ state.voteIndex++; render(); }
+        else { goto('scoreboard'); }
+      };
+    });
+    return c;
+  },
+
+  scoreboard(){
+    const rows = state.assignments.map(a=>{
+      const roundPts = (state.selfReport[a.name] ? 2 : 0) + (state.votes[a.name]||0);
+      state.scores[a.name] = (state.scores[a.name]||0) + roundPts;
+      return { name:a.name, round: roundPts, total: state.scores[a.name] };
+    }).sort((a,b)=> b.total - a.total);
+
+    const tableRows = rows.map((r,idx)=> `
+      <tr>
+        <td class="rank">${idx+1}</td>
+        <td>${r.name}</td>
+        <td>+${r.round} pts</td>
+        <td class="total">${r.total} pts</td>
+      </tr>
+    `).join('');
+
+    const c = el(`
+      <div class="card">
+        <p class="eyebrow">🏆 Résultats de la manche</p>
+        <h2>${state.scenario.title}</h2>
+        <table class="score-table">${tableRows}</table>
+        <div class="btn-row" style="margin-top:16px;">
+          <button class="btn-primary" id="again">🔁 Nouvelle manche</button>
+          <button class="btn-ghost" id="end">🏁 Terminer</button>
+        </div>
+      </div>
+    `);
+    c.querySelector('#again').onclick = ()=> goto('ready');
+    c.querySelector('#end').onclick = ()=>{
+      state.scores = {};
+      goto('setup');
+    };
+    return c;
+  }
+};
+
+render();
+</script>
+</body>
+</html>
