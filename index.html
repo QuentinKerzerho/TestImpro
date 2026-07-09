@@ -183,134 +183,119 @@
 // ---------- CONTENT ----------
 const SCENARIOS = [
   { title:"Le buffet du mariage",
-    context:"Un mariage tourne au chaos pendant le repas de fête. Le buffet est somptueux, mais quelque chose cloche entre les invités.",
+    context:"Il est 22h30. La salle des fêtes du Domaine des Tilleuls sent le champagne éventé et la cire des bougies. Le repas est fini, les discours aussi — sauf que le DJ n'est toujours pas arrivé et que personne n'ose lancer la piste de danse. Sur la grande table du buffet, il reste un énorme gâteau à trois étages à moitié entamé, et une pile de cadeaux pas encore ouverts. Les mariés ont disparu depuis vingt minutes pour « prendre l'air ». Dehors, on entend un orage qui approche. Tout le monde attend, un verre à la main, et commence doucement à s'impatienter — et à parler un peu trop librement.",
+    start:"La scène s'ouvre autour du buffet. Quelqu'un remarque à voix haute que les mariés ne sont plus là depuis un moment.",
     roles:[
-      {m:"Le témoin du marié, un peu jaloux", f:"La témoin du marié, un peu jalouse"},
-      {m:"L'ex du marié, caché derrière le bar", f:"L'ex du marié, cachée derrière le bar"},
-      {m:"Le traiteur, à bout de nerfs", f:"La traiteuse, à bout de nerfs"},
-      {m:"Le père envahissant de la mariée", f:"La mère envahissante de la mariée"},
-      {m:"Le photographe maladroit", f:"La photographe maladroite"},
-      {m:"L'invité surprise, non convié", f:"L'invitée surprise, non conviée"}
+      {m:"Le témoin stressé", f:"La témoin stressée", obj:"À un moment, craque et avoue que tu as complètement raté le discours que tu devais faire."},
+      {m:"L'ex jaloux", f:"L'ex jalouse", obj:"Trouve un moyen de glisser une pique sur l'ancien couple, sans que ça ait l'air volontaire."},
+      {m:"Le traiteur à bout de nerfs", f:"La traiteuse à bout de nerfs", obj:"Menace, même à moitié pour rire, d'arrêter le service si personne ne t'aide."},
+      {m:"Le père envahissant", f:"La mère envahissante", obj:"Essaie de convaincre tout le monde de faire un discours improvisé, là, maintenant."},
+      {m:"Le photographe maladroit", f:"La photographe maladroite", obj:"Fais tomber ou casse quelque chose en essayant de prendre LA photo parfaite."},
+      {m:"L'invité surprise, un peu trop à l'aise", f:"L'invitée surprise, un peu trop à l'aise", obj:"Fais croire que tu es un proche de la famille que personne ne connaît vraiment."}
     ]
   },
   { title:"Le vol retardé",
-    context:"Un vol est annulé en pleine nuit. Un petit groupe de passagers se retrouve coincé au terminal, avec beaucoup trop de temps devant lui.",
+    context:"Il est 1h15 du matin à l'aéroport. L'écran d'affichage vient de basculer de « RETARDÉ » à « ANNULÉ » sans que personne n'ait rien annoncé au micro. Le vol ne partira plus avant le lendemain matin. Les boutiques sont fermées, les distributeurs de snacks sont vides, et il ne reste que des chaises en plastique dures comme de la pierre. Un bagage abandonné tourne en boucle sur le tapis roulant à côté, personne ne vient le récupérer. Quelqu'un a réussi à dénicher une prise électrique, et tout le monde se dispute discrètement l'accès. Au loin, un agent d'escale évite soigneusement les regards.",
+    start:"La scène démarre autour de la prise électrique, où tout le monde essaie de recharger son téléphone en même temps.",
     roles:[
-      {m:"Le steward épuisé", f:"L'hôtesse épuisée"},
-      {m:"Le voyageur d'affaires stressé", f:"La voyageuse d'affaires stressée"},
-      {m:"Le touriste complètement perdu", f:"La touriste complètement perdue"},
-      {m:"L'agent de sécurité un peu trop zélé", f:"L'agente de sécurité un peu trop zélée"},
-      {m:"Le musicien qui va rater son concert", f:"La musicienne qui va rater son concert"},
-      {m:"Le mystérieux passager en costume", f:"La mystérieuse passagère en costume"}
+      {m:"Le steward épuisé", f:"L'hôtesse épuisée", obj:"Craque et avoue à voix haute que tu détestes ton travail."},
+      {m:"Le voyageur d'affaires stressé", f:"La voyageuse d'affaires stressée", obj:"Essaie de conclure un appel professionnel important malgré le bazar autour de toi."},
+      {m:"Le touriste perdu", f:"La touriste perdue", obj:"Demande de l'aide à tout le monde, un par un, pour un truc complètement basique."},
+      {m:"L'agent de sécurité zélé", f:"L'agente de sécurité zélée", obj:"Trouve une raison de fouiller ou contrôler quelqu'un, même sans vraie raison."},
+      {m:"Le musicien qui va rater son concert", f:"La musicienne qui va rater son concert", obj:"Essaie de convaincre quelqu'un de te prêter de l'argent pour un billet de dernière minute."},
+      {m:"Le passager mystérieux en costume", f:"La passagère mystérieuse en costume", obj:"Reste évasif sur qui tu es et où tu vas, toute la scène."}
     ]
   },
   { title:"La colocation",
-    context:"Une réunion de colocataires est organisée en urgence pour parler du loyer et du ménage. Ça sent la crise.",
+    context:"Il est 20h dans le salon, table basse couverte de post-it. C'est la réunion de coloc' mensuelle, censée durer 15 minutes — sauf que ça fait trois mois qu'elle n'a pas eu lieu, et que la liste des sujets qui fâchent s'est allongée : le loyer en retard, la vaisselle qui s'accumule, le chat du voisin qui rentre par la fenêtre, et une drôle d'odeur qui vient du frigo. Sur la table, un tableau blanc affiche encore les tâches ménagères du mois dernier, jamais cochées. Dehors, quelqu'un sonne à l'interphone — sans prévenir.",
+    start:"La scène commence quand quelqu'un pose le tableau blanc sur la table en disant qu'on ne bouge pas d'ici tant que rien n'est réglé.",
     roles:[
-      {m:"Le coloc qui ne paie jamais à temps", f:"La coloc qui ne paie jamais à temps"},
-      {m:"L'ex qui revient chercher ses affaires", f:"L'ex qui revient chercher ses affaires"},
-      {m:"Le voisin bruyant venu se plaindre", f:"La voisine bruyante venue se plaindre"},
-      {m:"Le propriétaire en visite surprise", f:"La propriétaire en visite surprise"},
-      {m:"L'ami incrusté depuis trois semaines", f:"L'amie incrustée depuis trois semaines"},
-      {m:"Le coloc secrètement amoureux d'un autre coloc", f:"La coloc secrètement amoureuse d'un autre coloc"}
+      {m:"Le coloc qui ne paie jamais à temps", f:"La coloc qui ne paie jamais à temps", obj:"Trouve une excuse improbable pour justifier ton retard de loyer."},
+      {m:"L'ex qui revient chercher ses affaires", f:"L'ex qui revient chercher ses affaires", obj:"Fais durer ta visite le plus longtemps possible en trouvant des prétextes."},
+      {m:"Le voisin bruyant venu se plaindre", f:"La voisine bruyante venue se plaindre", obj:"Menace d'appeler la police au moins une fois pendant la scène."},
+      {m:"Le propriétaire en visite surprise", f:"La propriétaire en visite surprise", obj:"Remarque à voix haute au moins deux dégâts dans l'appartement."},
+      {m:"L'ami incrusté depuis trois semaines", f:"L'amie incrustée depuis trois semaines", obj:"Fais comme si tu habitais officiellement ici depuis toujours."},
+      {m:"Le coloc secrètement amoureux d'un autre coloc", f:"La coloc secrètement amoureuse d'un autre coloc", obj:"Trouve un moyen de rester seul avec cette personne, même une seconde."}
     ]
   },
   { title:"Le sous-marin en avarie",
-    context:"Une panne mystérieuse immobilise un sous-marin en pleine mission. L'équipage doit garder son sang-froid... ou pas.",
+    context:"Il est 3h du matin, heure du bord, à 200 mètres sous la surface. Une alarme orange clignote silencieusement depuis dix minutes dans le poste central — le système de recyclage d'air vient de tomber en panne. L'équipage a de l'air pour encore quelques heures, pas plus. Sur la table de navigation, une carte marine est étalée, avec un point marqué au stylo rouge qu'on ne s'explique pas. Le café refroidit dans les gobelets, personne n'ose plus y toucher. Au fond de la coursive, un bruit métallique régulier se fait entendre, comme si quelque chose cognait contre la coque, de l'extérieur.",
+    start:"La scène commence autour de la table de navigation, quand quelqu'un remarque enfin le point marqué au stylo rouge.",
     roles:[
-      {m:"Le commandant du sous-marin", f:"La commandante du sous-marin"},
-      {m:"Le mécanicien en pleine panique", f:"La mécanicienne en pleine panique"},
-      {m:"L'espion infiltré dans l'équipage", f:"L'espionne infiltrée dans l'équipage"},
-      {m:"Le novice terrifié", f:"La novice terrifiée"},
-      {m:"Le scientifique qui cache un secret", f:"La scientifique qui cache un secret"},
-      {m:"L'opérateur radio qui capte un message étrange", f:"L'opératrice radio qui capte un message étrange"}
+      {m:"Le mécano stressé", f:"La mécano stressée", obj:"À un moment, pète un câble à cause du stress et hausse le ton sur quelqu'un."},
+      {m:"Le mécano en dépression", f:"La mécano en dépression", obj:"Trouve un moment pour parler de tes problèmes de couple, même si ce n'est pas le moment."},
+      {m:"Le mécano qui a tout le temps faim", f:"La mécano qui a tout le temps faim", obj:"Rappelle à tout le monde, au moins deux fois, que tu meurs de faim."},
+      {m:"Le commandant qui doute de lui", f:"La commandante qui doute d'elle", obj:"Demande discrètement conseil à quelqu'un avant de prendre une décision importante."},
+      {m:"Le novice terrifié", f:"La novice terrifiée", obj:"Demande au moins trois fois si tout va bien se passer."},
+      {m:"L'opérateur radio bizarrement calme", f:"L'opératrice radio bizarrement calme", obj:"Réagis à tout, même aux pires nouvelles, avec un calme suspect."}
     ]
   },
   { title:"Le tournage de télé-réalité",
-    context:"Les caméras tournent en continu dans une villa. Alliances, coups bas et petites phrases : rien n'est jamais anodin.",
+    context:"Il est 23h dans la villa, jour 12 de tournage. Les caméras tournent en continu, même si plus personne n'y fait vraiment attention. Sur la table basse du salon, une enveloppe scellée attend d'être ouverte — elle contient le nom de la personne éliminée cette semaine, mais la production a deux heures de retard sur le planning. Dans la cuisine, un plat entier préparé pour dix personnes n'a pas été touché depuis le début de la tension. Un micro-cravate, oublié allumé, traîne sur le canapé et capte absolument tout ce qui se dit.",
+    start:"La scène commence quand quelqu'un remarque que le micro-cravate oublié est resté allumé depuis le début.",
     roles:[
-      {m:"Le candidat manipulateur", f:"La candidate manipulatrice"},
-      {m:"Le présentateur sous pression", f:"La présentatrice sous pression"},
-      {m:"Le caméraman qui n'en peut plus", f:"La cadreuse qui n'en peut plus"},
-      {m:"Le candidat naïf", f:"La candidate naïve"},
-      {m:"Le producteur paniqué par l'audience", f:"La productrice paniquée par l'audience"},
-      {m:"L'ex-candidat revenu faire un scandale", f:"L'ex-candidate revenue faire un scandale"}
+      {m:"Le candidat manipulateur", f:"La candidate manipulatrice", obj:"Monte discrètement deux personnes l'une contre l'autre."},
+      {m:"Le présentateur sous pression", f:"La présentatrice sous pression", obj:"Essaie de garder le sourire alors que tout part en vrille autour de toi."},
+      {m:"Le caméraman qui n'en peut plus", f:"La cadreuse qui n'en peut plus", obj:"Fais au moins une remarque à voix haute du style « ça, ça va être coupé au montage »."},
+      {m:"Le candidat naïf", f:"La candidate naïve", obj:"Prends tout ce qu'on te dit au premier degré, même l'évident second degré."},
+      {m:"Le producteur paniqué par l'audience", f:"La productrice paniquée par l'audience", obj:"Essaie de relancer l'action à tout prix dès que ça devient calme."},
+      {m:"L'ex-candidat revenu faire un scandale", f:"L'ex-candidate revenue faire un scandale", obj:"Rappelle à tout le monde une ancienne injustice qu'on t'a faite dans l'émission."}
     ]
   },
   { title:"Le dîner de famille",
-    context:"Un repas de famille censé être tranquille. Sauf que tout le monde a quelque chose à cacher, ou à annoncer.",
+    context:"Il est 21h, la table est encore à moitié dressée avec le service en porcelaine que grand-mère ne sort que deux fois par an. Le plat principal refroidit dans la cuisine, personne n'ose lancer le service tant que tout le monde n'est pas assis. Sur le buffet, un vieil album photo est resté ouvert sur une page qu'on aurait préféré ne jamais rouvrir. Une bouteille de vin, déjà bien entamée, tourne un peu trop vite autour de la table. Dehors, une voiture vient de se garer devant la maison — personne n'attendait plus d'invité.",
+    start:"La scène commence à table, quand quelqu'un demande innocemment qui a bien pu se garer devant la maison.",
     roles:[
-      {m:"Le grand-père autoritaire", f:"La grand-mère autoritaire"},
-      {m:"L'oncle fauché qui vient demander de l'argent", f:"La tante fauchée qui vient demander de l'argent"},
-      {m:"Le cousin qui a une grande nouvelle à annoncer", f:"La cousine qui a une grande nouvelle à annoncer"},
-      {m:"Le beau-parent mal à l'aise", f:"La belle-parente mal à l'aise"},
-      {m:"L'enfant terrible de la famille", f:"La terreur de la famille"},
-      {m:"Le parent qui cache une liaison", f:"La mère qui cache une liaison"}
+      {m:"Le grand-père autoritaire", f:"La grand-mère autoritaire", obj:"Donne au moins un conseil non-demandé à chaque personne présente."},
+      {m:"L'oncle fauché", f:"La tante fauchée", obj:"Trouve un moyen détourné de demander de l'argent à quelqu'un."},
+      {m:"Le cousin avec une grande nouvelle", f:"La cousine avec une grande nouvelle", obj:"Essaie d'annoncer ta nouvelle au moins trois fois sans que personne ne t'écoute vraiment."},
+      {m:"Le beau-parent mal à l'aise", f:"La belle-parente mal à l'aise", obj:"Essaie de faire bonne impression en approuvant tout ce que dit tout le monde."},
+      {m:"L'enfant terrible de la famille", f:"La terreur de la famille", obj:"Pose une question gênante à voix haute, sans filtre."},
+      {m:"Le parent qui cache une liaison", f:"La mère qui cache une liaison", obj:"Évite soigneusement de répondre à une question précise sur où tu étais récemment."}
     ]
   },
   { title:"Le braquage raté",
-    context:"Un braquage de banque part complètement en vrille. Les otages, eux, gardent un calme suspect.",
+    context:"Il est 10h47 dans le hall d'une agence bancaire. Le plan devait durer trois minutes montre en main ; ça fait déjà vingt minutes que rien ne se passe comme prévu. L'alarme silencieuse a été déclenchée sans qu'on sache par qui, et un sac de sport rempli de billets traîne, ouvert, au milieu du hall. Les otages sont assis en cercle par terre, étrangement calmes, presque trop à l'aise. Sur le comptoir, un téléphone fixe sonne sans discontinuer depuis cinq bonnes minutes. Dehors, on devine déjà les gyrophares bleus à travers les vitres teintées.",
+    start:"La scène commence quand quelqu'un se décide enfin à décrocher le téléphone qui sonne sans arrêt.",
     roles:[
-      {m:"Le braqueur en chef, pas très sûr de lui", f:"La braqueuse en chef, pas très sûre d'elle"},
-      {m:"L'employé de banque, calme et malin", f:"L'employée de banque, calme et maligne"},
-      {m:"L'otage qui prend tout ça avec humour", f:"L'otage qui prend tout ça avec humour"},
-      {m:"Le négociateur de police au téléphone", f:"La négociatrice de police au téléphone"},
-      {m:"Le complice qui veut tout arrêter", f:"La complice qui veut tout arrêter"},
-      {m:"Le client qui filme tout en cachette", f:"La cliente qui filme tout en cachette"}
+      {m:"Le braqueur en chef pas sûr de lui", f:"La braqueuse en chef pas sûre d'elle", obj:"Demande discrètement conseil à un complice ou même à un otage."},
+      {m:"L'employé de banque calme et malin", f:"L'employée de banque calme et maligne", obj:"Essaie de désamorcer la situation en restant étonnamment poli."},
+      {m:"L'otage qui prend ça avec humour", f:"L'otage qui prend ça avec humour", obj:"Fais une blague ou une remarque déplacée sur la situation."},
+      {m:"Le négociateur de police au téléphone", f:"La négociatrice de police au téléphone", obj:"Répète au moins deux fois la même consigne de calme, sans être écouté."},
+      {m:"Le complice qui veut tout arrêter", f:"La complice qui veut tout arrêter", obj:"Essaie de convaincre le chef d'abandonner le plan."},
+      {m:"Le client qui filme tout en cachette", f:"La cliente qui filme tout en cachette", obj:"Commente à voix basse ce que tu es en train de filmer."}
     ]
   },
   { title:"L'expédition perdue",
-    context:"Un groupe de randonneurs se retrouve perdu en montagne alors que le temps se dégrade sérieusement.",
+    context:"Il est 16h, la nuit va tomber dans deux heures et le sentier a disparu sous un épais brouillard depuis un bon moment déjà. Le groupe s'est arrêté près d'un gros rocher qui ne figure sur aucune carte, et la boussole semble donner des indications légèrement différentes selon qui la tient. Dans les sacs, il reste une gourde d'eau, une barre de céréales, et une lampe frontale dont la pile faiblit. Un peu plus loin, une trace de pas fraîche dans la boue ne correspond à aucune chaussure du groupe.",
+    start:"La scène commence près du rocher, quand quelqu'un remarque la trace de pas qui n'appartient à personne du groupe.",
     roles:[
-      {m:"Le guide qui a perdu la carte", f:"La guide qui a perdu la carte"},
-      {m:"L'aventurier bien trop confiant", f:"L'aventurière bien trop confiante"},
-      {m:"Le novice complètement épuisé", f:"La novice complètement épuisée"},
-      {m:"Le survivaliste un peu parano", f:"La survivaliste un peu parano"},
-      {m:"Le photographe en quête du cliché parfait", f:"La photographe en quête du cliché parfait"},
-      {m:"L'inconnu croisé en chemin, qui cache quelque chose", f:"L'inconnue croisée en chemin, qui cache quelque chose"}
+      {m:"Le guide qui a perdu la carte", f:"La guide qui a perdu la carte", obj:"Fais semblant de savoir où on va, même en étant complètement perdu."},
+      {m:"L'aventurier trop confiant", f:"L'aventurière trop confiante", obj:"Propose un raccourci ou une idée risquée, avec beaucoup trop d'assurance."},
+      {m:"Le novice épuisé", f:"La novice épuisée", obj:"Demande à faire une pause, au moins deux fois."},
+      {m:"Le survivaliste parano", f:"La survivaliste parano", obj:"Vois un danger ou un complot dans chaque petit détail."},
+      {m:"Le photographe en quête du cliché parfait", f:"La photographe en quête du cliché parfait", obj:"Arrête le groupe au pire moment pour prendre une photo."},
+      {m:"L'inconnu croisé en chemin", f:"L'inconnue croisée en chemin", obj:"Reste vague sur d'où tu viens et pourquoi tu es là."}
     ]
   }
 ];
 
-const OBJECTIVES = [
-  "Fais dire à un autre joueur le mot « impossible ».",
-  "Convaincs le groupe de changer complètement de plan.",
-  "Reste calme et tourne tout en dérision, quoi qu'il arrive.",
-  "Raconte un mensonge énorme sans jamais être découvert.",
-  "Fais en sorte qu'on te confie un objet ou un secret important.",
-  "Imite discrètement les gestes d'un autre joueur pendant toute la scène.",
-  "Refuse toutes les propositions du groupe, sans jamais dire non directement.",
-  "Fais croire que tu es quelqu'un de bien plus important que tu ne l'es.",
-  "Trouve une excuse pour quitter la scène puis y revenir.",
-  "Fais rire un joueur en particulier — et seulement lui.",
-  "Recrute discrètement un allié secret parmi les autres joueurs.",
-  "Ne t'exprime que par questions pendant toute la scène.",
-  "Cache un objet imaginaire et ne révèle jamais où.",
-  "Fais croire que tu détiens un secret sur un autre personnage.",
-  "Change complètement d'avis au moins deux fois pendant la scène.",
-  "Complimente une personne du groupe de façon exagérée.",
-  "Trouve un prétexte pour donner un ordre à tout le monde.",
-  "Fais une prédiction dramatique sur ce qui va arriver.",
-  "Essaie de convaincre tout le monde que la situation est parfaitement normale.",
-  "Révèle une fausse identité juste avant la fin de la scène."
-];
-
-const EVENTS = [
-  "Une coupure de courant plonge tout le monde dans le noir quelques secondes.",
-  "Un bruit suspect se fait entendre tout près.",
-  "Quelqu'un reçoit un message urgent et mystérieux.",
-  "Un objet important disparaît soudainement.",
-  "Une personne inattendue fait irruption dans la scène.",
-  "Une alarme se déclenche sans raison apparente.",
-  "Le temps se dégrade brutalement.",
-  "Un des personnages se souvient d'un détail qui change tout.",
-  "Une échéance tombe : il faut décider, maintenant.",
-  "Une odeur ou un bruit étrange inquiète tout le monde.",
-  "Quelqu'un annonce une nouvelle inattendue par téléphone.",
-  "Un lien caché entre deux personnages est révélé au grand jour.",
-  "Une panne ou un incident technique bloque tout le monde.",
-  "Un des personnages doit prendre une décision immédiate.",
-  "Une rumeur commence brusquement à circuler dans le groupe."
+const ENDINGS = [
+  "Un cri perce le silence. Tout le monde se fige. C'est fini.",
+  "Les lumières s'éteignent d'un coup sec. Quand elles reviennent, plus personne n'ose dire un mot.",
+  "Une porte claque si fort que la conversation s'arrête net.",
+  "Un bruit sourd retentit, tout près. Plus personne ne bouge.",
+  "Quelqu'un lâche un objet qui se brise au sol. Le silence retombe d'un coup.",
+  "Une sirène hurle d'un seul coup. Impossible de continuer.",
+  "Le sol tremble, une seule seconde. Puis plus rien.",
+  "Une phrase, lâchée par erreur, glace instantanément toute la pièce.",
+  "Un flash aveuglant. Puis le noir complet.",
+  "La porte s'ouvre d'un coup sur quelqu'un que personne n'attendait. Il n'y a plus rien à ajouter.",
+  "Un téléphone sonne une seule fois, puis s'arrête. Le silence qui suit dit tout.",
+  "Quelque chose se brise, quelque part, hors de vue. Tout le monde se tait.",
+  "On frappe à la porte. Trois coups. Personne ne répond.",
+  "Une alarme hurle une seconde, avant de couper net. Le calme qui suit est pire que tout.",
+  "Les mots restent bloqués dans la gorge de tout le monde, au même instant. Fin de la scène."
 ];
 
 // ---------- STATE ----------
@@ -344,26 +329,26 @@ function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=M
 function generateStory(){
   const scenario = pick(SCENARIOS);
   const roles = shuffle(scenario.roles).slice(0, state.players.length);
-  const objectives = shuffle(OBJECTIVES).slice(0, state.players.length);
   const assignments = state.players.map((p, i)=>{
     const roleObj = roles[i];
     const roleText = p.gender==='f' ? roleObj.f : roleObj.m;
     const name = p.name.trim() || ('Joueur ' + (i+1));
-    return { name, role: roleText, objective: objectives[i] };
+    return { name, role: roleText, objective: roleObj.obj };
   });
   state.scenario = scenario;
   state.assignments = assignments;
   state.revealIndex = 0;
   state.reportIndex = 0;
   state.voteIndex = 0;
+  state.lastWordIndex = 0;
   state.selfReport = {};
   state.votes = {};
   assignments.forEach(a=> state.votes[a.name] = 0);
 }
 
-function triggerEvent(){
+function triggerEnding(){
   clearTimeout(state.autoTimer);
-  state.eventText = pick(EVENTS);
+  state.eventText = pick(ENDINGS);
   state.screen = 'event';
   render();
 }
@@ -448,6 +433,7 @@ const VIEWS = {
         <p class="eyebrow">La situation</p>
         <h2>${s.title}</h2>
         <p class="lead">${s.context}</p>
+        <div class="objective-box" style="margin-top:14px;"><strong>Pour démarrer :</strong><br>${s.start}</div>
         <p class="muted" style="margin-top:14px;">Lisez la situation à voix haute, tout le monde doit la connaître. Les rôles, eux, restent secrets.</p>
         <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Découvrir les rôles →</button>
       </div>
@@ -493,40 +479,46 @@ const VIEWS = {
         <p class="eyebrow">🎬 La scène commence</p>
         <h2>Improvisez !</h2>
         <div class="spotlight-wrap pulse" style="min-height:110px;"></div>
-        <p class="lead" style="margin-top:12px;">Un rebondissement va survenir... au moment le plus inattendu.</p>
-        <button class="btn-primary btn-block" id="trigger" style="margin-top:14px;">⚡ Déclencher l'événement</button>
+        <p class="lead" style="margin-top:12px;">Ça peut s'arrêter net, à tout moment, sans prévenir.</p>
+        <button class="btn-primary btn-block" id="trigger" style="margin-top:14px;">⚡ Précipiter la fin</button>
         <p class="muted" style="margin-top:8px;">(ou laissez faire le hasard)</p>
       </div>
     `);
-    c.querySelector('#trigger').onclick = triggerEvent;
+    c.querySelector('#trigger').onclick = triggerEnding;
     const delay = 45000 + Math.random()*75000; // 45s–120s
-    state.autoTimer = setTimeout(triggerEvent, delay);
+    state.autoTimer = setTimeout(triggerEnding, delay);
     return c;
   },
 
   event(){
     const c = el(`
       <div class="card reveal-card" style="text-align:center;">
-        <p class="eyebrow">🎭 Rebondissement</p>
+        <p class="eyebrow">🛑 Fin de la scène</p>
         <h2>${state.eventText}</h2>
-        <p class="lead">Intégrez ça à la scène, puis amenez-la vers sa conclusion.</p>
-        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Continuer la scène →</button>
+        <p class="lead">Chacun aura droit à une seule phrase pour clore son personnage. Pas plus.</p>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Tour de dernière phrase →</button>
       </div>
     `);
-    c.querySelector('#next').onclick = ()=> goto('wrapup');
+    c.querySelector('#next').onclick = ()=> goto('lastword');
     return c;
   },
 
-  wrapup(){
+  lastword(){
+    const i = state.lastWordIndex;
+    const a = state.assignments[i];
+    const isLast = i+1 === state.assignments.length;
     const c = el(`
       <div class="card" style="text-align:center;">
-        <p class="eyebrow">Fin de la scène</p>
-        <h2>Concluez naturellement</h2>
-        <p class="lead">Prenez encore une minute ou deux pour terminer la scène, puis validez.</p>
-        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Terminer la scène →</button>
+        <p class="eyebrow">🎤 Dernière phrase ${i+1} / ${state.assignments.length}</p>
+        <h2>À toi, ${a.name}</h2>
+        <p class="lead">Une seule phrase, pour clore ton personnage. Rien de plus.</p>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">${isLast ? "C'est dit → Voir les résultats" : "C'est dit → Suivant"}</button>
       </div>
     `);
-    c.querySelector('#next').onclick = ()=> goto('selfreport');
+    c.querySelector('#next').onclick = ()=>{
+      if(!isLast){ state.lastWordIndex++; render(); }
+      else { goto('selfreport'); }
+    };
     return c;
   },
 
