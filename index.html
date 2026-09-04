@@ -5,61 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>En Scène ! — Jeu d'impro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#150709;
-    --bg-2:#241017;
-    --card:#2c141b;
-    --curtain:#7a1f2b;
-    --curtain-dark:#3d0f16;
-    --gold:#c9a227;
-    --gold-bright:#eccb5c;
-    --cream:#f5efe6;
-    --rose:#b98087;
-    --font-display:'Playfair Display', serif;
-    --font-body:'Work Sans', sans-serif;
-    --font-mono:'IBM Plex Mono', monospace;
+    --bg:#f6f4fb;
+    --surface:#ffffff;
+    --surface-2:#f1ecfb;
+    --border:#ece8f5;
+    --text:#171321;
+    --muted:#8d889c;
+    --accent:#8b5cf6;
+    --accent-soft:#efe7ff;
+    --font:'Inter', sans-serif;
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--cream);font-family:var(--font-body);min-height:100vh;}
-  body{
-    background:
-      radial-gradient(ellipse at 50% -10%, rgba(201,162,39,0.10), transparent 60%),
-      var(--bg);
-  }
-  .curtain-bar{
-    height:14px;
-    background: repeating-linear-gradient(90deg, var(--curtain) 0 18px, var(--curtain-dark) 18px 36px);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.5) inset;
-  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;}
   .wrap{
-    max-width:480px;
+    max-width:460px;
     margin:0 auto;
-    min-height:calc(100vh - 28px);
+    min-height:100vh;
     display:flex;
     flex-direction:column;
-    padding:0 0 32px;
+    padding:0 0 40px;
   }
   header{
+    position:relative;
     text-align:center;
-    padding:28px 20px 8px;
+    padding:36px 20px 10px;
   }
+  .back-btn{
+    display:none;
+    position:absolute; left:16px; top:28px;
+    width:38px; height:38px; border-radius:50%;
+    background:var(--surface); color:var(--accent);
+    border:1.5px solid var(--border);
+    box-shadow:0 4px 10px rgba(139,92,246,0.15);
+    align-items:center; justify-content:center; cursor:pointer;
+  }
+  .wrap:not(.is-home) .back-btn{ display:flex; }
   header h1{
-    font-family:var(--font-display);
-    font-weight:900;
-    font-size:2rem;
+    font-family:var(--font);
+    font-weight:800;
+    font-size:1.6rem;
     margin:0;
-    letter-spacing:0.5px;
-    color:var(--gold-bright);
-    text-shadow:0 2px 14px rgba(201,162,39,0.35);
+    letter-spacing:-0.3px;
+    color:var(--text);
   }
   header p{
     margin:6px 0 0;
-    font-size:0.85rem;
-    color:var(--rose);
-    letter-spacing:1.5px;
-    text-transform:uppercase;
+    font-size:0.82rem;
+    color:var(--muted);
+    letter-spacing:0.3px;
   }
   main{
     flex:1;
@@ -69,115 +65,146 @@
     gap:16px;
   }
   .card{
-    background:var(--card);
-    border:1px solid rgba(201,162,39,0.18);
-    border-radius:16px;
-    padding:22px 20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:26px 22px;
+    box-shadow:0 10px 28px rgba(139,92,246,0.08);
   }
   .eyebrow{
-    font-family:var(--font-mono);
+    font-family:var(--font);
     font-size:0.72rem;
-    letter-spacing:2px;
+    font-weight:700;
+    letter-spacing:1.2px;
     text-transform:uppercase;
-    color:var(--gold);
-    margin:0 0 6px;
+    color:var(--accent);
+    margin:0 0 8px;
   }
   h2{
-    font-family:var(--font-display);
-    font-weight:700;
-    font-size:1.4rem;
-    margin:0 0 10px;
-    color:var(--cream);
+    font-family:var(--font);
+    font-weight:800;
+    font-size:1.35rem;
+    margin:0 0 12px;
+    color:var(--text);
+    letter-spacing:-0.3px;
   }
-  p.lead{ line-height:1.55; color:var(--cream); opacity:0.92; margin:0 0 4px;}
-  .muted{ color:var(--rose); font-size:0.9rem; }
+  p.lead{ line-height:1.6; color:var(--text); opacity:0.75; margin:0 0 4px;}
+  .muted{ color:var(--muted); font-size:0.88rem; }
 
   button{
-    font-family:var(--font-body);
-    font-weight:600;
-    font-size:1rem;
+    font-family:var(--font);
+    font-weight:700;
+    font-size:0.96rem;
     border:none;
-    border-radius:12px;
-    padding:14px 18px;
+    border-radius:999px;
+    padding:15px 20px;
     cursor:pointer;
-    transition:transform .12s ease, box-shadow .12s ease;
+    transition:opacity .12s ease, transform .1s ease;
   }
-  button:active{ transform:scale(0.97); }
+  button:active{ transform:scale(0.98); }
   .btn-primary{
-    background:linear-gradient(180deg, var(--gold-bright), var(--gold));
-    color:#241007;
-    box-shadow:0 6px 18px rgba(201,162,39,0.28);
+    background:var(--accent);
+    color:#fff;
+    box-shadow:0 8px 20px rgba(139,92,246,0.32);
   }
+  .btn-primary:hover{ opacity:0.92; }
   .btn-ghost{
-    background:transparent;
-    color:var(--cream);
-    border:1px solid rgba(245,239,230,0.25);
+    background:var(--surface-2);
+    color:var(--accent);
+    border:none;
   }
   .btn-block{ width:100%; }
   .btn-row{ display:flex; gap:10px; }
   .btn-row button{ flex:1; }
 
-  .stepper{ display:flex; align-items:center; justify-content:center; gap:18px; margin:6px 0 4px; }
-  .stepper button{ width:44px; height:44px; border-radius:50%; padding:0; font-size:1.3rem; }
-  .stepper .count{ font-family:var(--font-display); font-size:2rem; min-width:40px; text-align:center; color:var(--gold-bright);}
+  .stepper{ display:flex; align-items:center; justify-content:center; gap:22px; margin:8px 0 4px; }
+  .stepper button{ width:42px; height:42px; border-radius:14px; padding:0; font-size:1.2rem; background:var(--accent-soft); color:var(--accent); }
+  .stepper .count{ font-family:var(--font); font-weight:800; font-size:1.8rem; min-width:36px; text-align:center; color:var(--text);}
 
   .player-row{ display:flex; gap:8px; align-items:center; margin-bottom:10px; }
   .player-row input[type=text]{
-    flex:1; background:var(--bg-2); border:1px solid rgba(245,239,230,0.15);
-    color:var(--cream); border-radius:10px; padding:11px 12px; font-family:var(--font-body); font-size:0.95rem;
+    flex:1; background:var(--surface-2); border:1px solid transparent;
+    color:var(--text); border-radius:14px; padding:11px 13px; font-family:var(--font); font-size:0.94rem;
   }
   .pill-group{ display:flex; gap:6px; }
   .pill{
-    font-family:var(--font-mono); font-size:0.72rem; padding:8px 9px; border-radius:20px;
-    border:1px solid rgba(245,239,230,0.2); background:transparent; color:var(--rose); cursor:pointer;
+    font-family:var(--font); font-size:0.76rem; font-weight:700; padding:8px 11px; border-radius:10px;
+    border:none; background:var(--surface-2); color:var(--muted); cursor:pointer;
   }
-  .pill.active{ background:var(--gold); color:#241007; border-color:var(--gold); }
+  .pill.active{ background:var(--accent); color:#fff; }
 
   .spotlight-wrap{
     position:relative; display:flex; align-items:center; justify-content:center;
-    padding:34px 10px; border-radius:16px; overflow:hidden;
-    background:radial-gradient(circle at 50% 40%, rgba(201,162,39,0.22), transparent 65%);
+    padding:30px 10px; border-radius:16px;
+    background:var(--accent-soft);
   }
   .spotlight-wrap.pulse::before{
-    content:''; position:absolute; inset:-40%;
-    background:radial-gradient(circle, rgba(201,162,39,0.18), transparent 60%);
-    animation:pulseGlow 3.2s ease-in-out infinite;
+    content:''; width:10px; height:10px; border-radius:50%;
+    background:var(--accent);
+    animation:pulseDot 1.4s ease-in-out infinite;
   }
-  @keyframes pulseGlow{ 0%,100%{ transform:scale(0.85); opacity:0.5;} 50%{ transform:scale(1.1); opacity:1;} }
+  @keyframes pulseDot{ 0%,100%{ opacity:0.3; transform:scale(0.85);} 50%{ opacity:1; transform:scale(1.15);} }
   .reveal-card{
-    animation:revealIn .45s ease;
+    animation:revealIn .3s ease;
     text-align:center;
   }
-  @keyframes revealIn{ from{ opacity:0; transform:scale(0.85);} to{opacity:1; transform:scale(1);} }
-  .role-name{ font-family:var(--font-display); font-size:1.3rem; color:var(--gold-bright); margin:2px 0 10px;}
+  @keyframes revealIn{ from{ opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .role-name{ font-family:var(--font); font-weight:800; font-size:1.2rem; color:var(--accent); margin:2px 0 10px;}
   .objective-box{
-    background:var(--bg-2); border-left:3px solid var(--gold); border-radius:8px;
-    padding:12px 14px; text-align:left; font-size:0.92rem; line-height:1.5; margin-top:8px;
+    background:var(--accent-soft); border-left:3px solid var(--accent); border-radius:12px;
+    padding:12px 14px; text-align:left; font-size:0.9rem; line-height:1.5; margin-top:8px; color:var(--text);
   }
 
   .score-table{ width:100%; border-collapse:collapse; margin-top:6px;}
-  .score-table td{ padding:9px 4px; border-bottom:1px solid rgba(245,239,230,0.1); font-family:var(--font-mono); font-size:0.9rem;}
-  .score-table td.rank{ color:var(--gold); width:24px; }
-  .score-table td.total{ text-align:right; color:var(--gold-bright); font-weight:600;}
+  .score-table td{ padding:9px 4px; border-bottom:1px solid var(--border); font-family:var(--font); font-size:0.9rem;}
+  .score-table td.rank{ color:var(--accent); width:24px; }
+  .score-table td.total{ text-align:right; color:var(--text); font-weight:700;}
 
   .name-choices{ display:flex; flex-direction:column; gap:8px; margin-top:10px;}
-  .name-choices button{ background:var(--bg-2); color:var(--cream); border:1px solid rgba(245,239,230,0.15); text-align:left;}
-  .name-choices button.selected{ border-color:var(--gold); background:rgba(201,162,39,0.15);}
+  .name-choices button{ background:var(--surface-2); color:var(--text); border:none; text-align:left; border-radius:14px; font-family:var(--font); font-weight:700;}
+  .name-choices button.selected{ background:var(--accent); color:#fff;}
+
+  .wrap.is-home header{ display:none; }
+  .home-screen{
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:20px 20px 0; gap:6px;
+  }
+  .home-logo{
+    width:88px; height:88px; border-radius:26px;
+    background:linear-gradient(135deg, var(--accent), #6d3ff0);
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.4rem; margin-bottom:18px;
+    box-shadow:0 12px 28px rgba(139,92,246,0.35);
+  }
+  .home-title{ font-family:var(--font); font-weight:800; font-size:2rem; letter-spacing:-0.5px; margin:0; color:var(--text); }
+  .home-tagline{ color:var(--muted); font-size:0.95rem; margin:8px 0 34px; }
+  .btn-play{
+    font-family:var(--font); font-weight:800; font-size:1.15rem; letter-spacing:0.5px;
+    background:var(--accent); color:#fff; border:none; border-radius:999px;
+    padding:20px 64px; box-shadow:0 12px 26px rgba(139,92,246,0.38); cursor:pointer;
+  }
+  .btn-play:active{ transform:scale(0.97); }
+  .social-row{ display:flex; gap:14px; justify-content:center; padding:24px 20px 30px; }
+  .social-row a{
+    width:38px; height:38px; border-radius:50%; background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center; color:var(--accent);
+    text-decoration:none;
+  }
 
   footer{ text-align:center; padding:10px 20px 0; }
 </style>
 </head>
 <body>
-<div class="curtain-bar"></div>
 <div class="wrap">
   <header>
-    <h1>🎭 En Scène !</h1>
+    <button class="back-btn" id="backBtn" aria-label="Retour à l'accueil">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <h1>En Scène !</h1>
     <p>le générateur de scènes d'impro</p>
   </header>
   <main id="app"></main>
 </div>
-<div class="curtain-bar"></div>
 
 <script>
 // ---------- CONTENT ----------
@@ -298,18 +325,68 @@ const ENDINGS = [
   "Les mots restent bloqués dans la gorge de tout le monde, au même instant. Fin de la scène."
 ];
 
+// ---------- MODE ENQUÊTE (contenu de test) ----------
+const ENQUETE_SCENARIO = {
+  title:"Qui a fait ça ?!",
+  context:"Il est 14h dans l'open space de l'agence. Tout semblait normal jusqu'à ce qu'un cri retentisse près de la salle de réunion : quelqu'un a fait caca par terre, en plein couloir. Personne n'a rien vu, personne n'avoue — mais l'odeur, elle, ne ment pas. La responsable RH a fermé la porte à clé et réuni tout le monde dans la salle de pause pour tirer ça au clair, avant que la direction n'arrive pour sa visite surprise dans dix minutes.",
+  start:"La scène commence quand quelqu'un demande, plein d'aplomb, qui a bien pu faire une chose pareille.",
+  roles:[
+    {m:"Le stagiaire trop parfait", f:"La stagiaire trop parfaite", obj:"Défends-toi en expliquant pourquoi tu traînais près de la salle de pause à ce moment précis."},
+    {m:"Le responsable RH sous pression", f:"La responsable RH sous pression", obj:"Explique pourquoi on ne t'a pas trouvé(e) pendant dix bonnes minutes tout à l'heure."},
+    {m:"Le collègue tout le temps au téléphone", f:"La collègue tout le temps au téléphone", obj:"Justifie l'appel mystérieux que tu as reçu juste avant que ça arrive."},
+    {m:"Le petit nouveau qui veut bien faire", f:"La petite nouvelle qui veut bien faire", obj:"Explique pourquoi tu avais l'air si pressé(e) il y a un instant."},
+    {m:"Le collègue qui mange bizarrement à son bureau", f:"La collègue qui mange bizarrement à son bureau", obj:"Justifie ce que tu avais dans les mains il y a dix minutes."},
+    {m:"Le stagiaire toujours en retard", f:"La stagiaire toujours en retard", obj:"Explique pourquoi tu es encore arrivé(e) en retard aujourd'hui."}
+  ]
+};
+const CULPRIT_SECRET = "En plus de ton alibi : tu es LE/LA COUPABLE. Glisse un détail bizarrement précis sur l'endroit ou l'heure exacte — sans que ça se voie trop.";
+const CLUES = [
+  "Indice : la porte de la salle de pause était fermée à 13h50.",
+  "Indice : quelqu'un s'est lavé les mains bien plus longtemps que d'habitude.",
+  "Indice : quelqu'un est resté enfermé aux toilettes plus de dix minutes ce matin.",
+  "Indice : le distributeur de papier du 2e étage était vide ce matin.",
+  "Indice : quelqu'un a discrètement vaporisé du parfum dans le couloir juste avant le cri."
+];
+const FINAL_CARD = "La direction arrive dans 30 secondes. Il faut trancher MAINTENANT.";
+
+// ---------- MODE DÉBAT (contenu de test) ----------
+const DEBATE_TOPICS = [
+  "Le ketchup, est-ce que c'est une soupe ?",
+  "Les pigeons sont-ils des espions du gouvernement ?",
+  "Faut-il mettre l'ananas sur la pizza ?",
+  "Le lundi devrait-il être interdit par la loi ?",
+  "Les licornes existent-elles, juste très bien cachées ?",
+  "Faut-il un couloir de gauche obligatoire dans les escalators ?",
+  "Le petit-déjeuner devrait-il être interdit après midi ?",
+  "Les chats complotent-ils contre l'humanité ?",
+  "Marcher pieds nus chez soi, génie ou anarchie ?",
+  "Faut-il bannir les gens qui répondent \"vu\" sans répondre ?"
+];
+const DEBATER_PERSONAS = [
+  {m:"L'expert autoproclamé", f:"L'experte autoproclamée", obj:"Invente des statistiques et des études qui n'existent pas, avec un aplomb total."},
+  {m:"Le sceptique dramatique", f:"La sceptique dramatique", obj:"Prends la moindre objection comme une trahison personnelle."},
+  {m:"Le fan inconditionnel", f:"La fan inconditionnelle", obj:"Ramène tout à une anecdote personnelle, même hors sujet."},
+  {m:"Le calme suspect", f:"La calme suspecte", obj:"Reste étonnamment zen, comme si tu savais déjà que tu avais gagné."},
+  {m:"Le faux neutre", f:"La fausse neutre", obj:"Prétends vouloir entendre les deux côtés, tout en penchant clairement pour ton camp."},
+  {m:"Le fougueux", f:"La fougueuse", obj:"Hausse le ton dès qu'on te contredit, même à peine."}
+];
+
 // ---------- STATE ----------
 let state = {
-  screen:'setup',
+  screen:'home',
+  mode:'classic', // 'classic' | 'enquete'
   players:[], // {name, gender}
-  scores:{},  // name -> total
   scenario:null,
   assignments:[], // {name, role, objective}
-  revealIndex:0,
-  reportIndex:0,
+  culpritName:null,
+  clueIndex:0,
+  suspicionVotes:{},
   voteIndex:0,
-  selfReport:{}, // name -> bool
-  votes:{}, // name -> votesReceived count
+  debateTopic:'',
+  judgeName:null,
+  debateWinner:null,
+  revealIndex:0,
+  lastWordIndex:0,
   eventText:'',
   autoTimer:null
 };
@@ -321,12 +398,62 @@ function initPlayers(n){
   }
   state.players = arr;
 }
-initPlayers(5);
+initPlayers(3);
 
 function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
 
 function generateStory(){
+  if(state.mode === 'debate'){
+    const shuffledPlayers = shuffle(state.players.map((p,i)=>{
+      const name = p.name.trim() || ('Joueur ' + (i+1));
+      return { name, gender:p.gender };
+    }));
+    const judge = shuffledPlayers[0];
+    const debaters = shuffledPlayers.slice(1);
+    const personas = shuffle(DEBATER_PERSONAS).slice(0, debaters.length);
+    const assignments = debaters.map((p,i)=>{
+      const persona = personas[i % personas.length];
+      const roleText = p.gender==='f' ? persona.f : persona.m;
+      const team = i % 2 === 0 ? 'pour' : 'contre';
+      return { name:p.name, isJudge:false, team, role:roleText, objective:persona.obj };
+    });
+    assignments.push({ name:judge.name, isJudge:true, team:null, role:'Juge', objective:'' });
+    // le juge doit être révélé en dernier pour clore le tour de révélation
+    const judgeIdx = assignments.findIndex(a=>a.isJudge);
+    const [judgeEntry] = assignments.splice(judgeIdx,1);
+    assignments.push(judgeEntry);
+
+    state.debateTopic = pick(DEBATE_TOPICS);
+    state.judgeName = judge.name;
+    state.assignments = assignments;
+    state.revealIndex = 0;
+    state.debateWinner = null;
+    return;
+  }
+  if(state.mode === 'enquete'){
+    const scenario = ENQUETE_SCENARIO;
+    const roles = shuffle(scenario.roles).slice(0, state.players.length);
+    const assignments = state.players.map((p, i)=>{
+      const roleObj = roles[i];
+      const roleText = p.gender==='f' ? roleObj.f : roleObj.m;
+      const name = p.name.trim() || ('Joueur ' + (i+1));
+      return { name, role: roleText, objective: roleObj.obj, isCulprit:false };
+    });
+    const culpritIdx = Math.floor(Math.random()*assignments.length);
+    assignments[culpritIdx].isCulprit = true;
+    state.scenario = scenario;
+    state.assignments = assignments;
+    state.culpritName = assignments[culpritIdx].name;
+    state.revealIndex = 0;
+    state.clueIndex = 0;
+    state.voteIndex = 0;
+    state.suspicionVotes = {};
+    assignments.forEach(a=> state.suspicionVotes[a.name] = 0);
+    state.totalDraws = 3 + Math.floor(Math.random()*3); // 3 à 5 tirages, le dernier stoppe tout
+    state.drawCount = 0;
+    return;
+  }
   const scenario = pick(SCENARIOS);
   const roles = shuffle(scenario.roles).slice(0, state.players.length);
   const assignments = state.players.map((p, i)=>{
@@ -338,19 +465,9 @@ function generateStory(){
   state.scenario = scenario;
   state.assignments = assignments;
   state.revealIndex = 0;
-  state.reportIndex = 0;
-  state.voteIndex = 0;
   state.lastWordIndex = 0;
-  state.selfReport = {};
-  state.votes = {};
-  assignments.forEach(a=> state.votes[a.name] = 0);
-}
-
-function triggerEnding(){
-  clearTimeout(state.autoTimer);
-  state.eventText = pick(ENDINGS);
-  state.screen = 'event';
-  render();
+  state.totalDraws = 3 + Math.floor(Math.random()*4); // 3 à 6 tirages avant la carte fatale
+  state.drawCount = 0;
 }
 
 function goto(screen){ state.screen = screen; render(); }
@@ -359,6 +476,7 @@ function goto(screen){ state.screen = screen; render(); }
 function render(){
   const app = document.getElementById('app');
   app.innerHTML = '';
+  document.querySelector('.wrap').classList.toggle('is-home', state.screen === 'home');
   const view = VIEWS[state.screen];
   app.appendChild(view());
 }
@@ -371,6 +489,36 @@ function el(html){
 
 const VIEWS = {
 
+  home(){
+    const c = el(`
+      <div style="display:flex; flex-direction:column; flex:1;">
+        <div class="home-screen">
+          <div class="home-logo">🎭</div>
+          <h1 class="home-title">En Scène !</h1>
+          <p class="home-tagline">le générateur de scènes d'impro</p>
+          <button class="btn-play" id="play">JOUER</button>
+          <button class="btn-ghost" id="enquete" style="margin-top:14px;">🕵️ Tester : Mode Enquête</button>
+          <button class="btn-ghost" id="debate" style="margin-top:10px;">🗣️ Tester : Mode Débat</button>
+        </div>
+        <div class="social-row">
+          <a href="#" title="Discord" aria-label="Discord">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </a>
+          <a href="#" title="Instagram" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1"/></svg>
+          </a>
+          <a href="#" title="Infos" aria-label="Infos">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.5" fill="currentColor"/></svg>
+          </a>
+        </div>
+      </div>
+    `);
+    c.querySelector('#play').onclick = ()=>{ state.mode='classic'; goto('setup'); };
+    c.querySelector('#enquete').onclick = ()=>{ state.mode='enquete'; goto('setup'); };
+    c.querySelector('#debate').onclick = ()=>{ state.mode='debate'; goto('setup'); };
+    return c;
+  },
+
   setup(){
     const n = state.players.length;
     const rows = state.players.map((p,i)=>`
@@ -381,43 +529,46 @@ const VIEWS = {
           <button class="pill gender ${p.gender==='f'?'active':''}" data-g="f" data-idx="${i}">F</button>
           <button class="pill gender ${p.gender==='n'?'active':''}" data-g="n" data-idx="${i}">–</button>
         </div>
+        ${n>3 ? `<button class="pill remove" data-idx="${i}" style="padding:8px 10px;">✕</button>` : ''}
       </div>
     `).join('');
 
     const c = el(`
       <div class="card">
-        <p class="eyebrow">Étape 1 · Installation</p>
         <h2>Qui joue ce soir ?</h2>
-        <div class="stepper">
-          <button id="minus">−</button>
-          <div class="count">${n}</div>
-          <button id="plus">+</button>
-        </div>
-        <p class="muted" style="text-align:center;margin-top:0;">joueurs (3 à 6)</p>
-        <div style="margin-top:14px;">${rows}</div>
-        <button class="btn-primary btn-block" id="go" style="margin-top:12px;">C'est parti →</button>
+        <div style="margin-top:6px;">${rows}</div>
+        ${n<6 ? `<button class="btn-ghost btn-block" id="addPlayer" style="margin-top:4px;">+ Ajouter un joueur</button>` : `<p class="muted" style="text-align:center;margin:4px 0 0;">6 joueurs maximum</p>`}
+        <button class="btn-primary btn-block" id="go" style="margin-top:14px;">C'est parti →</button>
       </div>
     `);
 
-    c.querySelector('#minus').onclick = ()=>{ if(state.players.length>3){ state.players.pop(); render(); } };
-    c.querySelector('#plus').onclick = ()=>{ if(state.players.length<6){ state.players.push({name:'',gender:'n'}); render(); } };
     c.querySelectorAll('.pname').forEach(inp=>{
       inp.oninput = (e)=>{ state.players[e.target.dataset.idx].name = e.target.value; };
     });
     c.querySelectorAll('.gender').forEach(btn=>{
       btn.onclick = (e)=>{ state.players[e.target.dataset.idx].gender = e.target.dataset.g; render(); };
     });
+    c.querySelectorAll('.remove').forEach(btn=>{
+      btn.onclick = (e)=>{ state.players.splice(e.target.dataset.idx,1); render(); };
+    });
+    const addBtn = c.querySelector('#addPlayer');
+    if(addBtn) addBtn.onclick = ()=>{ if(state.players.length<6){ state.players.push({name:'',gender:'n'}); render(); } };
     c.querySelector('#go').onclick = ()=> goto('ready');
     return c;
   },
 
   ready(){
+    const isEnquete = state.mode === 'enquete';
+    const isDebate = state.mode === 'debate';
+    const title = isDebate ? "Prêts pour le clash ?" : isEnquete ? "Prêts à mener l'enquête ?" : "Prêts à découvrir votre histoire ?";
+    const lead = isDebate ? "Un sujet complètement à côté de la plaque, deux camps, et un juge désigné en secret." : isEnquete ? "Une personne du groupe va secrètement devenir la coupable. Les autres devront la démasquer." : "Une situation et un rôle secret vont être tirés pour chacun de vous.";
+    const btnLabel = isDebate ? "🗣️ Lancer le débat" : isEnquete ? "🔍 Lancer l'enquête" : "🎲 Générer l'histoire";
     const c = el(`
       <div class="card" style="text-align:center;">
         <p class="eyebrow">Étape 2 · Génération</p>
-        <h2>Prêts à découvrir votre histoire ?</h2>
-        <p class="lead">Une situation et un rôle secret vont être tirés pour chacun de vous.</p>
-        <button class="btn-primary btn-block" id="gen" style="margin-top:16px;">🎲 Générer l'histoire</button>
+        <h2>${title}</h2>
+        <p class="lead">${lead}</p>
+        <button class="btn-primary btn-block" id="gen" style="margin-top:16px;">${btnLabel}</button>
         <button class="btn-ghost btn-block" id="back" style="margin-top:10px;">← Modifier les joueurs</button>
       </div>
     `);
@@ -427,6 +578,18 @@ const VIEWS = {
   },
 
   context(){
+    if(state.mode === 'debate'){
+      const c = el(`
+        <div class="card">
+          <p class="eyebrow">Le sujet du débat</p>
+          <h2>${state.debateTopic}</h2>
+          <p class="lead">Deux camps vont s'affronter là-dessus, chacun avec ses arguments (plus ou moins de mauvaise foi). Un juge a été désigné en secret : il ne débat pas, mais tranchera à la fin.</p>
+          <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Découvrir les rôles →</button>
+        </div>
+      `);
+      c.querySelector('#next').onclick = ()=> goto('reveal');
+      return c;
+    }
     const s = state.scenario;
     const c = el(`
       <div class="card">
@@ -458,12 +621,38 @@ const VIEWS = {
     `);
     const spot = c.querySelector('#spot');
     c.querySelector('#showBtn').onclick = ()=>{
-      spot.innerHTML = `
-        <div class="reveal-card">
-          <p class="eyebrow">Ton rôle</p>
-          <p class="role-name">${a.role}</p>
-          <div class="objective-box"><strong>Objectif secret :</strong><br>${a.objective}</div>
-        </div>`;
+      let inner;
+      if(state.mode === 'debate'){
+        if(a.isJudge){
+          inner = `
+            <div class="reveal-card">
+              <p class="eyebrow">Ton rôle</p>
+              <p class="role-name">⚖️ Tu es LE JUGE</p>
+              <div class="objective-box">Tu ne débats pas ce tour. À la fin, tu trancheras quel camp t'a le plus convaincu (ou fait le plus rire).</div>
+            </div>`;
+        } else {
+          const teamLabel = a.team === 'pour' ? 'Camp POUR' : 'Camp CONTRE';
+          inner = `
+            <div class="reveal-card">
+              <p class="eyebrow">${teamLabel}</p>
+              <p class="role-name">${a.role}</p>
+              <div class="objective-box"><strong>Ta petite manie :</strong><br>${a.objective}</div>
+            </div>`;
+        }
+      } else {
+        const label = state.mode==='enquete' ? 'Ton alibi à défendre' : 'Objectif secret';
+        const culpritBox = (state.mode==='enquete' && a.isCulprit)
+          ? `<div class="objective-box" style="margin-top:8px; border-color:#e0533d;"><strong>🤫 Secret :</strong><br>${CULPRIT_SECRET}</div>`
+          : '';
+        inner = `
+          <div class="reveal-card">
+            <p class="eyebrow">Ton rôle</p>
+            <p class="role-name">${a.role}</p>
+            <div class="objective-box"><strong>${label} :</strong><br>${a.objective}</div>
+            ${culpritBox}
+          </div>`;
+      }
+      spot.innerHTML = inner;
       c.querySelector('#nextBtn').style.display = 'block';
     };
     c.querySelector('#nextBtn').onclick = ()=>{
@@ -474,32 +663,206 @@ const VIEWS = {
   },
 
   scene(){
+    if(state.mode === 'enquete') return VIEWS.sceneEnquete();
+    if(state.mode === 'debate') return VIEWS.sceneDebate();
+
     const c = el(`
       <div class="card" style="text-align:center;">
-        <p class="eyebrow">🎬 La scène commence</p>
+        <p class="eyebrow">🎬 La scène continue</p>
         <h2>Improvisez !</h2>
-        <div class="spotlight-wrap pulse" style="min-height:110px;"></div>
-        <p class="lead" style="margin-top:12px;">Ça peut s'arrêter net, à tout moment, sans prévenir.</p>
-        <button class="btn-primary btn-block" id="trigger" style="margin-top:14px;">⚡ Précipiter la fin</button>
-        <p class="muted" style="margin-top:8px;">(ou laissez faire le hasard)</p>
+        <div class="spotlight-wrap pulse" id="spot" style="min-height:110px;"></div>
+        <button class="btn-primary btn-block" id="draw" style="margin-top:14px;">🂠 Tirer la carte</button>
+        <p class="muted" style="margin-top:8px;">Une carte peut tomber à tout moment...</p>
       </div>
     `);
-    c.querySelector('#trigger').onclick = triggerEnding;
-    const delay = 45000 + Math.random()*75000; // 45s–120s
-    state.autoTimer = setTimeout(triggerEnding, delay);
+    const spot = c.querySelector('#spot');
+    const drawBtn = c.querySelector('#draw');
+
+    function scheduleAuto(){
+      const delay = 18000 + Math.random()*17000; // 18s–35s
+      state.autoTimer = setTimeout(doDraw, delay);
+    }
+
+    function doDraw(){
+      if(state.screen !== 'scene') return;
+      clearTimeout(state.autoTimer);
+      state.drawCount++;
+      if(state.drawCount >= state.totalDraws){
+        state.eventText = pick(ENDINGS);
+        goto('event');
+        return;
+      }
+      drawBtn.disabled = true;
+      spot.innerHTML = `
+        <div class="reveal-card">
+          <p class="role-name">🂠 Fausse alerte</p>
+          <p class="lead" style="margin:0;">Rien ne se passe... pour l'instant.</p>
+        </div>`;
+      setTimeout(()=>{
+        if(state.screen !== 'scene') return;
+        spot.innerHTML = '';
+        drawBtn.disabled = false;
+        scheduleAuto();
+      }, 1700);
+    }
+
+    drawBtn.onclick = doDraw;
+    scheduleAuto();
+    return c;
+  },
+
+  sceneEnquete(){
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">🕵️ L'enquête continue</p>
+        <h2>Improvisez !</h2>
+        <div class="spotlight-wrap pulse" id="spot" style="min-height:110px;"></div>
+        <p class="muted" style="margin-top:8px;">Des indices vont tomber tout seuls...</p>
+      </div>
+    `);
+    const spot = c.querySelector('#spot');
+
+    function scheduleAuto(){
+      const delay = 9000 + Math.random()*7000; // 9s–16s, automatique, pas de bouton
+      state.autoTimer = setTimeout(doDraw, delay);
+    }
+
+    function doDraw(){
+      if(state.screen !== 'scene') return;
+      clearTimeout(state.autoTimer);
+      state.drawCount++;
+      if(state.drawCount >= state.totalDraws){
+        state.eventText = FINAL_CARD;
+        goto('event');
+        return;
+      }
+      const clue = CLUES[state.clueIndex % CLUES.length];
+      state.clueIndex++;
+      spot.innerHTML = `
+        <div class="reveal-card">
+          <p class="role-name">🂠 Nouvel indice</p>
+          <p class="lead" style="margin:0;">${clue}</p>
+        </div>`;
+      setTimeout(()=>{
+        if(state.screen !== 'scene') return;
+        spot.innerHTML = '';
+        scheduleAuto();
+      }, 2600);
+    }
+
+    scheduleAuto();
+    return c;
+  },
+
+  sceneDebate(){
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">🗣️ Le débat</p>
+        <h2>${state.debateTopic}</h2>
+        <div class="spotlight-wrap pulse" style="min-height:80px;"></div>
+        <p class="lead" style="margin-top:12px;">Chaque camp argumente. Le juge écoute, en silence, sans débattre.</p>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">⚖️ Passer au verdict</button>
+        <p class="muted" style="margin-top:8px;">C'est au juge d'appuyer, quand il/elle a assez entendu.</p>
+      </div>
+    `);
+    c.querySelector('#next').onclick = ()=> goto('verdict');
+    return c;
+  },
+
+  verdict(){
+    const pourNames = state.assignments.filter(a=>a.team==='pour').map(a=>a.name).join(', ');
+    const contreNames = state.assignments.filter(a=>a.team==='contre').map(a=>a.name).join(', ');
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">⚖️ Au juge, ${state.judgeName}</p>
+        <h2>Quel camp l'emporte ?</h2>
+        <div class="btn-row" style="margin-top:14px;">
+          <button class="btn-primary" id="pour">POUR<br><span style="font-weight:400;font-size:0.78rem;">${pourNames}</span></button>
+          <button class="btn-primary" id="contre" style="background:var(--text);">CONTRE<br><span style="font-weight:400;font-size:0.78rem;">${contreNames}</span></button>
+        </div>
+      </div>
+    `);
+    c.querySelector('#pour').onclick = ()=>{ state.debateWinner='pour'; goto('debateResult'); };
+    c.querySelector('#contre').onclick = ()=>{ state.debateWinner='contre'; goto('debateResult'); };
+    return c;
+  },
+
+  debateResult(){
+    const winners = state.assignments.filter(a=>a.team===state.debateWinner).map(a=>a.name).join(' et ');
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">🎉 Verdict</p>
+        <h2>Le camp ${state.debateWinner==='pour' ? 'POUR' : 'CONTRE'} l'emporte !</h2>
+        <p class="lead">Bravo à ${winners} — plaidoirie retenue par le juge.</p>
+        <div class="btn-row" style="margin-top:16px;">
+          <button class="btn-primary" id="again">🔁 Nouveau débat</button>
+          <button class="btn-ghost" id="home">🏠 Accueil</button>
+        </div>
+      </div>
+    `);
+    c.querySelector('#again').onclick = ()=> goto('ready');
+    c.querySelector('#home').onclick = ()=> goto('home');
     return c;
   },
 
   event(){
+    const isEnquete = state.mode === 'enquete';
     const c = el(`
       <div class="card reveal-card" style="text-align:center;">
         <p class="eyebrow">🛑 Fin de la scène</p>
         <h2>${state.eventText}</h2>
-        <p class="lead">Chacun aura droit à une seule phrase pour clore son personnage. Pas plus.</p>
-        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">Tour de dernière phrase →</button>
+        <p class="lead">${isEnquete ? "C'est le moment de désigner le/la coupable." : "Chacun aura droit à une seule phrase pour clore son personnage. Pas plus."}</p>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">${isEnquete ? "Passer au vote →" : "Tour de dernière phrase →"}</button>
       </div>
     `);
-    c.querySelector('#next').onclick = ()=> goto('lastword');
+    c.querySelector('#next').onclick = ()=> goto(isEnquete ? 'accuse' : 'lastword');
+    return c;
+  },
+
+  accuse(){
+    const i = state.voteIndex;
+    const voter = state.assignments[i];
+    const others = state.assignments.filter(a=> a.name !== voter.name);
+    const choices = others.map(o=> `<button class="choice" data-name="${o.name}">${o.name}</button>`).join('');
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">Vote ${i+1} / ${state.assignments.length}</p>
+        <h2>📱 ${voter.name}</h2>
+        <p class="lead">Selon toi, qui est le/la coupable ?</p>
+        <div class="name-choices">${choices}</div>
+      </div>
+    `);
+    c.querySelectorAll('.choice').forEach(btn=>{
+      btn.onclick = ()=>{
+        state.suspicionVotes[btn.dataset.name] = (state.suspicionVotes[btn.dataset.name]||0) + 1;
+        if(i+1 < state.assignments.length){ state.voteIndex++; render(); }
+        else { goto('revealCulprit'); }
+      };
+    });
+    return c;
+  },
+
+  revealCulprit(){
+    const sorted = [...state.assignments].sort((a,b)=> (state.suspicionVotes[b.name]||0) - (state.suspicionVotes[a.name]||0));
+    const rows = sorted.map(a=> `
+      <tr>
+        <td>${a.name}${a.name===state.culpritName ? ' 🎯' : ''}</td>
+        <td style="text-align:right;">${state.suspicionVotes[a.name]||0} vote(s)</td>
+      </tr>
+    `).join('');
+    const c = el(`
+      <div class="card" style="text-align:center;">
+        <p class="eyebrow">🎉 Révélation</p>
+        <h2>Le/la coupable était... ${state.culpritName} !</h2>
+        <table class="score-table" style="margin-top:10px;">${rows}</table>
+        <div class="btn-row" style="margin-top:16px;">
+          <button class="btn-primary" id="again">🔁 Nouvelle enquête</button>
+          <button class="btn-ghost" id="home">🏠 Accueil</button>
+        </div>
+      </div>
+    `);
+    c.querySelector('#again').onclick = ()=> goto('ready');
+    c.querySelector('#home').onclick = ()=> goto('home');
     return c;
   },
 
@@ -512,85 +875,22 @@ const VIEWS = {
         <p class="eyebrow">🎤 Dernière phrase ${i+1} / ${state.assignments.length}</p>
         <h2>À toi, ${a.name}</h2>
         <p class="lead">Une seule phrase, pour clore ton personnage. Rien de plus.</p>
-        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">${isLast ? "C'est dit → Voir les résultats" : "C'est dit → Suivant"}</button>
+        <button class="btn-primary btn-block" id="next" style="margin-top:14px;">${isLast ? "C'est dit → Fin de la manche" : "C'est dit → Suivant"}</button>
       </div>
     `);
     c.querySelector('#next').onclick = ()=>{
       if(!isLast){ state.lastWordIndex++; render(); }
-      else { goto('selfreport'); }
+      else { goto('roundend'); }
     };
     return c;
   },
 
-  selfreport(){
-    const i = state.reportIndex;
-    const a = state.assignments[i];
+  roundend(){
     const c = el(`
       <div class="card" style="text-align:center;">
-        <p class="eyebrow">Bilan ${i+1} / ${state.assignments.length}</p>
-        <h2>📱 ${a.name}</h2>
-        <p class="lead">As-tu atteint ton objectif secret ?</p>
-        <p class="objective-box">${a.objective}</p>
-        <div class="btn-row" style="margin-top:14px;">
-          <button class="btn-primary" id="yes">Oui, réussi !</button>
-          <button class="btn-ghost" id="no">Non, raté</button>
-        </div>
-      </div>
-    `);
-    const advance = (val)=>{
-      state.selfReport[a.name] = val;
-      if(i+1 < state.assignments.length){ state.reportIndex++; render(); }
-      else { goto('vote'); }
-    };
-    c.querySelector('#yes').onclick = ()=> advance(true);
-    c.querySelector('#no').onclick = ()=> advance(false);
-    return c;
-  },
-
-  vote(){
-    const i = state.voteIndex;
-    const voter = state.assignments[i];
-    const others = state.assignments.filter(a=> a.name !== voter.name);
-    const choices = others.map(o=> `<button class="choice" data-name="${o.name}">${o.name}</button>`).join('');
-    const c = el(`
-      <div class="card" style="text-align:center;">
-        <p class="eyebrow">Vote ${i+1} / ${state.assignments.length}</p>
-        <h2>📱 ${voter.name}</h2>
-        <p class="lead">Qui a été le/la meilleur(e) acteur/actrice de la scène ?</p>
-        <div class="name-choices">${choices}</div>
-      </div>
-    `);
-    c.querySelectorAll('.choice').forEach(btn=>{
-      btn.onclick = ()=>{
-        state.votes[btn.dataset.name] = (state.votes[btn.dataset.name]||0) + 1;
-        if(i+1 < state.assignments.length){ state.voteIndex++; render(); }
-        else { goto('scoreboard'); }
-      };
-    });
-    return c;
-  },
-
-  scoreboard(){
-    const rows = state.assignments.map(a=>{
-      const roundPts = (state.selfReport[a.name] ? 2 : 0) + (state.votes[a.name]||0);
-      state.scores[a.name] = (state.scores[a.name]||0) + roundPts;
-      return { name:a.name, round: roundPts, total: state.scores[a.name] };
-    }).sort((a,b)=> b.total - a.total);
-
-    const tableRows = rows.map((r,idx)=> `
-      <tr>
-        <td class="rank">${idx+1}</td>
-        <td>${r.name}</td>
-        <td>+${r.round} pts</td>
-        <td class="total">${r.total} pts</td>
-      </tr>
-    `).join('');
-
-    const c = el(`
-      <div class="card">
-        <p class="eyebrow">🏆 Résultats de la manche</p>
+        <p class="eyebrow">🎉 Bravo à tous !</p>
         <h2>${state.scenario.title}</h2>
-        <table class="score-table">${tableRows}</table>
+        <p class="lead">Belle scène. Prêts pour une nouvelle histoire ?</p>
         <div class="btn-row" style="margin-top:16px;">
           <button class="btn-primary" id="again">🔁 Nouvelle manche</button>
           <button class="btn-ghost" id="end">🏁 Terminer</button>
@@ -598,14 +898,11 @@ const VIEWS = {
       </div>
     `);
     c.querySelector('#again').onclick = ()=> goto('ready');
-    c.querySelector('#end').onclick = ()=>{
-      state.scores = {};
-      goto('setup');
-    };
+    c.querySelector('#end').onclick = ()=> goto('setup');
     return c;
   }
 };
-
+document.getElementById('backBtn').onclick = ()=> goto('home');
 render();
 </script>
 </body>
